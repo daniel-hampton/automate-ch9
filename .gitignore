@@ -99,3 +99,4 @@ ENV/
 .idea/
 cats/
 some/
+/this spam text file must have spaces.txt
