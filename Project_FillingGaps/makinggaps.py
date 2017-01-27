@@ -18,7 +18,8 @@ while True:
     except ValueError:
         print('That was not an integer. Try again.')
         continue
-
+    if type(userGap) == int:
+        break
 
 
 # Create number suffix regex
@@ -27,9 +28,9 @@ numRegex = re.compile('({})(?P<num>\\d+)(\\..*)'.format(userPrefix), re.IGNORECA
 # Get directory to search from user
 while True:
     searchPath = input('Enter the directory path to search:\n')
-    if searchPath.lower() == 'quit':
+    if searchPath.lower() == 'quit': 	# option to exit the program
         sys.exit(1)
-    else:
+    else:				# error handling
         searchPath = os.path.abspath(searchPath)
         if os.path.isdir(searchPath):
             break
@@ -51,13 +52,10 @@ fileList.sort(key=lambda pairs: pairs[0])   # to sort properly when number does 
 print('Matching files:')
 pprint.pprint(fileList)
 
-# Find the gap
+# Increment the file numbers for userGap and afterward by one
 for i, x in enumerate(fileList):
-    if i == 0:
-        continue
-    elif fileList[i][0] != (fileList[i-1][0] + 1):  # if the number does not come next in sequence
-        gap = fileList[i-1][0] + 1      # Assign the missing sequential number to variable: gap
-        fileList[i][0] = gap            # Replace out of sequence number with the missing number
+    if fileList[i][0] >= userGap:
+        fileList[i][0] += 1
 
 # Print to check the renumbered list
 print('Renumbered fileList:')
