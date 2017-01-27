@@ -83,8 +83,10 @@ while True:
         continue
 
 # Rename the files
+# reversed() is used to prevent overwriting of the following file
+# while the loop is iterating.
 print('Renaming files...')
-for n in range(len(renamedFileList)):
+for n in reversed(range(len(renamedFileList))): 
     shutil.move(os.path.join(searchPath, fileList[n][1]), os.path.join(searchPath, renamedFileList[n]))
 
 print('Done.')
